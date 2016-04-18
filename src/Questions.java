@@ -17,14 +17,12 @@ public class Questions{
 		a4=text4;
 	}
 	public void qdisplay(){
-		player.text(questiontxt, 200,300);
-		player.text(a1,120, 420);
-		player.text(a2,120, 470);
-		player.text(a3,120, 520);
-		player.text(a4,120, 570);
+		player.text(questiontxt, 20,250);
+		player.text(a1,20, 420);
+		player.text(a2,20, 470);
+		player.text(a3,20, 520);
+		player.text(a4,20, 570);
 	
-
-		
 	}
 	
 }

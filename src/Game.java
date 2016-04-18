@@ -1,32 +1,59 @@
 import processing.core.*;
+import de.bezier.data.sql.*;
+
 
 public class Game extends PApplet {
+	
 	String s1="lol";
 	
 	//int wealth=50;
 	//String health="60";
 	
 	Player p1 = new Player(this,s1);
-	Questions q1 = new Questions(this,"this is the text question text","this is a1",s1,"this is a3","this is a4" );
+	Questions[] myCircleArray = new Questions[1];
+	//Questions q1 = new Questions(this,"this is the text question text","this is a1",s1,"this is a3","this is a4" );
 	
 	
 	public void setup(){
-		background(0);
-		
-	}
 	
-	public void settings(){
+		background(0);
 		size(401,601);
+		
+		MySQL msql = new MySQL(this,"localhost","oop questions","Rob","1234");
+		
+		if ( msql.connect() )
+	    {
+			int i=0;
+			fill(255,0,0);
+	    	rect(150,200,200,200);
+	    	msql.query( "SELECT * FROM questions" );
+	    	 while (msql.next())
+	         {
+	    		 String questiontxt = msql.getString("Q1");
+	    		 String a1 = msql.getString("A1");
+	    		 String a2 = msql.getString("A2");
+	    		 String a3 = msql.getString("A3");
+	             String a4 = msql.getString("A4");
+	             
+	             myCircleArray[i] = new Questions(this,questiontxt,a1,a2,a3,a4);
+	             i++;
+	             //text(questiontxt,300,300);
+	         }
+	    	
+	    }
+	    
 	}
 	
 	public void draw()
 	{
 		//call various questions depending on time
-		
+
 		dobackground();
 		p1.display();//Display player stats
-		q1.qdisplay();
-		
+		for(int i=0; i < myCircleArray.length;i++){
+				myCircleArray[i].qdisplay();
+			
+			}
 	}
 	
 	public void dobackground(){
@@ -65,6 +92,8 @@ public class Game extends PApplet {
 	public static void main(String args[]){
 		PApplet.main(new String[] {"--present","Game"});
 	}
+	
+	
 }
 
 
