@@ -26,12 +26,18 @@ public class Questions{
 	
 	public void qdisplay(){
 		
-		parent.fill(246, 177, 85);
 		parent.text(questiontxt, 20,250);
 		parent.text(a1,20, 420);
 		parent.text(a2,20, 470);
 		parent.text(a3,20, 520);
 		parent.text(a4,20, 570);
+		/*
+		parent.text(resArray1[0],320, 520);
+		parent.text(resArray2[0],330, 520);
+		parent.text(resArray3[0],340, 520);
+		parent.text(resArray4[0],350, 520);
+		*/
+		
 		
 	}
 	public String applyValues1(){

@@ -16,27 +16,24 @@ public class Player{
 	}
 
 	public void display(){
-		//Display stats of character in bars
+		//display stats of character in bars
 		//Displays health bar status
-		parent.fill(220, 20, 60);//Colour healthbar
+		parent.fill(255,0,0);//Colour healthbar
 		parent.rect(100,200,50,healthb*-1);
 		parent.fill(0,0,0);
 		parent.text(healthb,120,200);
-		
 		//Displays wealth bar status
-		parent.fill(255, 215, 0);//Colour wealthbar
+		parent.fill(0,255,0);//Colour wealthbar
 		parent.rect(150,200,50,wealthb*-1);				
 		parent.fill(0,0,0);
 		parent.text(wealthb,170,200);
-		
 		//Displays happiness bar status
-		parent.fill(127, 255, 0);//Colour happiness bar
+		parent.fill(0,0,255);//Colour happiness bar
 		parent.rect(200,200,50,happyb*-1);
 		parent.fill(0,0,0);
 		parent.text(happyb,220,200);
-		
 		//Displays age bar status
-		parent.fill(255, 140, 0);//Colour age bar
+		parent.fill(255,255,255);//Colour age bar
 		parent.rect(250,200,50,ageb*-1);
 		parent.fill(0,0,0);
 		parent.text(ageb,270,200);//Prints status of bar
