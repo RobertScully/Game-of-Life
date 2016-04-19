@@ -2,68 +2,79 @@ import processing.core.*;
 
 public class Player{
 	
-	PApplet player;//Parent PApplet that i will render onto
+	PApplet parent;//Parent PApplet that i will render onto
+	//public boolean dead;
 	
-	String stringy;
-	//String health;
+	int healthb=50;
+	int wealthb=50; 
+	int happyb=50;
+	int ageb=50;
 
 	
-	Player(PApplet p,String s){
-		player=p;
-		stringy=s;
-		//health=h;
-		//player.text(" ",h);
+	Player(PApplet p, int heb, int wb, int hab, int age){
+		parent=p;
+		healthb=heb;
+		wealthb=wb;
+		happyb=hab;
+		ageb=age;
 	}
 
-	
-	int health=50;
-	
-	//int hp = player.int(health);
-	
-	
-	
-	
-	
-	
 	public void display(){
-		//display stats of character
-		
-		int healthbar=health*-2;//Flips bar so it increases in size upwards
-		
-		Float wealth=50.0f;//Initializes wealth bar to half size
-		Float wealthbar=wealth*-2f;//Flips bar so it increases in size upwards
-		
-		Float happy=50.0f;//Initializes Happy bar to half size
-		Float happybar=happy*-2f;//Flips bar so it increases in size upwards
-		
-		Float age=50.0f;//Initializes Age bar to half size
-		Float agebar=age*-2f;//Flips bar so it increases in size upwards
-		
-		player.fill(255,0,0);//Colour healthbar
-		player.rect(100,200,50,healthbar);
-		player.fill(0,255,0);//Colour wealthbar
-		player.rect(150,200,50,wealthbar);
-		player.fill(0,0,255);//Colour happiness bar
-		player.rect(200,200,50,happybar);
-		player.fill(255,255,255);//Colour age bar
-		player.rect(250,200,50,agebar);
-		
-		//player.text(health, 200,300);
-		
+		//display stats of character in bars
+		//Displays health bar status
+		parent.fill(255,0,0);//Colour healthbar
+		parent.rect(100,200,50,healthb);
+		parent.fill(0,0,0);
+		parent.text(healthb*-1,120,200);
+		//Displays wealth bar status
+		parent.fill(0,255,0);//Colour wealthbar
+		parent.rect(150,200,50,wealthb);
+		parent.fill(0,0,0);
+		parent.text(wealthb*-1,170,200);
+		//Displays happiness bar status
+		parent.fill(0,0,255);//Colour happiness bar
+		parent.rect(200,200,50,happyb);
+		parent.fill(0,0,0);
+		parent.text(happyb*-1,220,200);
+		//Displays age bar status
+		parent.fill(255,255,255);//Colour age bar
+		parent.rect(250,200,50,ageb);
+		parent.fill(0,0,0);
+		parent.text(ageb*-1,270,200);//Prints status of bar
+	
 	}
 	
 	public void upHealth(int val){
-		health=health+val;
-		
+		for(int i=0;i<val;i++){
+		healthb=healthb-1;//Increases healthiness
+		}
 	}
-	
-	/*
-	public float getHB(){
-		return HB;
+	public void downHealth(int val){
+		for(int i=0;i<val;i++){
+			healthb=healthb+1;
+		}
 	}
-	
-	public void setHB(float HB){
-		this.HB=HB;
+	public void upWealth(int val){
+		for(int i=0;i<val;i++){
+			wealthb=wealthb-1;
+		}
 	}
-	*/
+	public void downWealth(int val){
+		for(int i=0;i<val;i++){
+			wealthb=wealthb+1;
+		}
+	}
+	public void upHappy(int val){
+		for(int i=0;i<val;i++){
+			happyb=happyb-1;
+		}
+	}
+	public void downHappy(int val){
+		for(int i=0;i<val;i++){
+			happyb=happyb-1;
+		}
+	}
+	public void upAge(int val){
+		ageb=ageb-1;//Increase age by 1
+	}
 }
