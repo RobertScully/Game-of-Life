@@ -3,15 +3,10 @@ import processing.core.*;
 public class Player{
 	
 	PApplet parent;//Parent PApplet that i will render onto
-	//public boolean dead;
 	
-	int healthb=50;
-	int wealthb=50; 
-	int happyb=50;
-	int ageb=50;
+	int healthb, wealthb, happyb, ageb;
 
-	
-	Player(PApplet p, int heb, int wb, int hab, int age){
+	Player(PApplet p, int heb, int wb, int hab,int age){
 		parent=p;
 		healthb=heb;
 		wealthb=wb;
@@ -28,7 +23,7 @@ public class Player{
 		parent.text(healthb*-1,120,200);
 		//Displays wealth bar status
 		parent.fill(0,255,0);//Colour wealthbar
-		parent.rect(150,200,50,wealthb);
+		parent.rect(150,200,50,wealthb);				
 		parent.fill(0,0,0);
 		parent.text(wealthb*-1,170,200);
 		//Displays happiness bar status
@@ -41,40 +36,25 @@ public class Player{
 		parent.rect(250,200,50,ageb);
 		parent.fill(0,0,0);
 		parent.text(ageb*-1,270,200);//Prints status of bar
-	
 	}
 	
 	public void upHealth(int val){
-		for(int i=0;i<val;i++){
-		healthb=healthb-1;//Increases healthiness
-		}
-	}
-	public void downHealth(int val){
-		for(int i=0;i<val;i++){
-			healthb=healthb+1;
+		if(healthb*-1>=0)
+		{
+			healthb=healthb-val;  //Increases healthiness
 		}
 	}
 	public void upWealth(int val){
-		for(int i=0;i<val;i++){
-			wealthb=wealthb-1;
-		}
-	}
-	public void downWealth(int val){
-		for(int i=0;i<val;i++){
-			wealthb=wealthb+1;
+		if(wealthb*-1>0)
+		{
+			wealthb=wealthb-val;
 		}
 	}
 	public void upHappy(int val){
-		for(int i=0;i<val;i++){
-			happyb=happyb-1;
-		}
-	}
-	public void downHappy(int val){
-		for(int i=0;i<val;i++){
-			happyb=happyb-1;
-		}
+		happyb=happyb-val;
 	}
 	public void upAge(int val){
-		ageb=ageb-1;//Increase age by 1
+		ageb=ageb-val;//Increase age by 1
 	}
+	
 }
