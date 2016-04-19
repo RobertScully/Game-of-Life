@@ -21,7 +21,6 @@ public class Questions{
 		res2=answer2;
 		res3=answer3;
 		res4=answer4;
-		// list[0] is now "Chernenko", list[1] is "Andropov"...
 		
 	}
 	
