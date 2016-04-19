@@ -1,11 +1,10 @@
 import processing.core.*;//import processing library
 import java.util.ArrayList;//Import array list functionality
-import de.bezier.data.sql.*;//import database library
+import de.bezier.data.sql.*;//import library for accessing mysql database
 
 
 public class Game extends PApplet {
 
-	
 	String answer1,answer2,answer3,answer4;
 	
 	String results;
@@ -17,9 +16,13 @@ public class Game extends PApplet {
 	
 	int qnumber=0;
 	
+	float chanceofdeath=random(1000);
+	float increment=0.002f;
+	
+	
 	String anystring="no answer selected";
 	
-	Player player = new Player(this, -50, -50, -50,-50);
+	Player player = new Player(this, 50, 50, 50);
 	public Questions q1;
 	
 	ArrayList<Questions> myQuestionList = new ArrayList<Questions>();
@@ -27,7 +30,7 @@ public class Game extends PApplet {
 	
 	public void setup()
 	{
-		background(0);
+		background(2, 75, 127);
 		size(401,601);
 		
 		MySQL msql = new MySQL(this,"localhost","oop questions","Rob","1234");//Database setup
@@ -52,56 +55,52 @@ public class Game extends PApplet {
 	    }
 		else
 		{
+			//fill(246, 177, 85);
 			text("Database failed to connect",150,300);
+			
 		}
 	}
 	
 	public void draw()
 	{
-		
-		
-		dobackground();//Draws background before main draw begins
+		dobackground();//Draws background continuously
 		mouseHover();//Changes colour of answers when mouse is over each box
+		
 		player.display();//Display player stats
 		
 		q1 = myQuestionList.get(qnumber);
 		q1.qdisplay();//Displays bars
-		
-		//text("Question number: "qnumber,20,200);
-		text(myQuestionList.size(),200,350);
-		text(anystring,200,375);
-		
-		//text(answer4,200,475);
+
+		fill(246, 177, 85);
+		text("Question number:",135,220);
+		text(qnumber+1,235,220);
+
+		text(myQuestionList.size(),200,350);//Shows total questions for error checking
+
+	
 		
 		if(qnumber<myQuestionList.size()-1){
 			if(q1.answered==true)
 			{
 				qnumber++;
-				//player.upAge(5);
+				player.upAge(1);
+				
+				
 			}
 		}
 		
-		//text(player.wealthb,190,375);
-		if(player.wealthb*-1<=0)
-		{
-			text("Your Dead",250,400);
-		}
+		fill(246, 177, 85);
+		text(chanceofdeath,200,300);
+		fill(96, 237, 37);
+		text(increment,200,400);
+	
 	}
 	
 	
 	public void dobackground(){
 		//Code to draw background rectangles for positioning
-		
-		//Pros bar rect
-		fill(0,250,0);
-		rect(0,0,100,200);
-		
-		//Cons bar rect
-		fill(250,0,0);
-		rect(300,0,100,200);
-		
 		//Resource bar rects
-		fill(0,0,0);//Sets background of bars to black
+		fill(23, 56, 67);;//Sets background of bars to black
 		stroke(0);
 		rect(100,0,50,200);//Health
 		rect(150,0,50,200);//Wealth
@@ -110,16 +109,17 @@ public class Game extends PApplet {
 		
 		//Question rect
 		stroke(0);
-		fill(100,100,100);//colour light grey
+		noStroke();
+		fill(2, 75, 127);//colour light grey
 		rect(0,200,400,200);//Middle rect for questions
 		
 		//Question answers outline rects
-		fill(200,200,200);//fill dark grey
+		fill(23, 56, 67);//
 		stroke(0);//
-		rect(0,400,400,50);//Question 1 rect
-		rect(0,450,400,50);//Question 2 rect
-		rect(0,500,400,50);//Question 3 rect
-		rect(0,550,400,50);//Question 4 rect
+		rect(0,400,400,50,15);//Question 1 rect
+		rect(0,450,400,50,15);//Question 2 rect
+		rect(0,500,400,50,15);//Question 3 rect
+		rect(0,550,400,50,15);//Question 4 rect
 	}
 	
 	
@@ -128,11 +128,13 @@ public class Game extends PApplet {
 		PApplet.main(new String[] {"--present","Game"});
 	}
 	
+	
 	public void mouseClicked(){
 		if(mouseX >0 && mouseX<400 && mouseY>400 && mouseY<450)
 		{
-			fill(0);
-			rect(0,400,400,50);
+			increment=increment+increment/3;
+			chanceofdeath=random(100000);
+			player.upAge(1);
 			anystring="you clicked a";
 			results=q1.applyValues1();
 			q1.answered=true;
@@ -143,8 +145,6 @@ public class Game extends PApplet {
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>450 && mouseY<500)
 		{
-			fill(0);
-			rect(0,450,400,50);
 			anystring="you clicked b";
 			results=q1.applyValues2();
 			q1.answered=true;
@@ -157,8 +157,6 @@ public class Game extends PApplet {
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>500 && mouseY<550)
 		{
-			fill(0);
-			rect(0,500,400,50);
 			anystring="you clicked c";
 			results=q1.applyValues3();
 			q1.answered=true;
@@ -169,8 +167,6 @@ public class Game extends PApplet {
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>550 && mouseY<600)
 		{
-			fill(0);
-			rect(0,550,400,50);
 			anystring="you clicked d";
 			results=q1.applyValues4();
 			q1.answered=true;
@@ -186,23 +182,23 @@ public class Game extends PApplet {
 		if(mouseX >0 && mouseX<400 && mouseY>400 && mouseY<450)
 		{
 			fill(0);
-			rect(0,400,400,50);
+			rect(0,400,400,50,15);
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>450 && mouseY<500)
 		{
 			fill(0);
-			rect(0,450,400,50);
+			rect(0,450,400,50,15);
 			
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>500 && mouseY<550)
 		{
 			fill(0);
-			rect(0,500,400,50);
+			rect(0,500,400,50,15);
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>550 && mouseY<600)
 		{
 			fill(0);
-			rect(0,550,400,50);
+			rect(0,550,400,50,15);
 		}
 	}
 }
