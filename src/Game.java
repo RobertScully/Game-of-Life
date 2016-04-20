@@ -84,7 +84,7 @@ public class Game extends PApplet {
 			fill(246, 177, 85);
 			text("Congratulations you completed the quiz",20,250);
 			text("You answered ",20,270);
-			text(player.correctb,100,270);
+			text(player.correctb,103,270);
 			text("questions correctly",120,270);
 		}
 	}
