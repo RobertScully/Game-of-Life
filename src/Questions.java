@@ -3,9 +3,7 @@ import processing.core.*;
 public class Questions{
 	PApplet parent;
 	
-
-	
-	boolean answered=false;
+	boolean answered=false;//Boolean to check if a question has been answered.
 	String questiontxt, a1,a2,a3,a4;
 	String res1,res2,res3,res4;
 	
@@ -21,24 +19,15 @@ public class Questions{
 		res2=answer2;
 		res3=answer3;
 		res4=answer4;
-		
 	}
 	
 	public void qdisplay(){
-		
+		parent.fill(246, 177, 85);
 		parent.text(questiontxt, 20,250);
 		parent.text(a1,20, 420);
 		parent.text(a2,20, 470);
 		parent.text(a3,20, 520);
 		parent.text(a4,20, 570);
-		/*
-		parent.text(resArray1[0],320, 520);
-		parent.text(resArray2[0],330, 520);
-		parent.text(resArray3[0],340, 520);
-		parent.text(resArray4[0],350, 520);
-		*/
-		
-		
 	}
 	public String applyValues1(){
 		return res1;
