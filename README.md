@@ -1,10 +1,10 @@
-# Quiz Loader Game
+# Game-of-Life
+Game of life a text based adventure game where your decisions effect the outcome of your life. The Aim of the game is to live as long as possible
 
-For this assignment I have made a program that will read a specified database of questions and load it into the sketch.
 
-The program will read in all questions in the database and ask the user them one after another. 
-The user answers the questions by clicking buttons one of four buttons. If the user answers correctly a green bar that tracks correct answers increases or 
-a red bar that tracks incorrect answers increases if the user answers incorrectly.
-With the use of a database questions can be added, modified or deleted easily. Because it is a database the quiz can even be entirely changed and it will not
-affect the functionality of the program. For example with this program I have written a quiz on the greek gods and goddesses but any quiz or test with four 
-possible answers could be used. A multiple choice quiz or test could even be loaded into the database and it would be able to track correct and incorrect answers
+For this assignment I am hoping to build a game using processing through the Eclipse IDE.
+
+The game will be to survive as long as possible based on decisions you make.
+The game will have different resource bars based on a range of lifestyle parameters such as health, wealth and happiness.
+The resource bars and answers to previous questions will affect what happens to your character and what questions you get.
+I am hoping to publish it on the android appstore as it is something I would like to have on my phone to play. 
