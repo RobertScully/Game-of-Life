@@ -13,7 +13,7 @@ public class Game extends PApplet {
 	String[] resArray3=new String[2];
 	String[] resArray4=new String[2];
 	
-	int qnumber=0;//Int for tracking what number question currently being asked
+	public int qnumber=0;//Int for tracking what number question currently being asked
 	
 	Player player = new Player(this, 0, 0);
 	public Questions q1;
@@ -54,7 +54,6 @@ public class Game extends PApplet {
 	
 	public void draw()
 	{
-		
 		dobackground();//Draws background continuously
 		mouseHover();//Changes colour of answers when mouse is over each box
 		
@@ -62,30 +61,37 @@ public class Game extends PApplet {
 		
 		q1 = myQuestionList.get(qnumber);
 		
-		q1.qdisplay();//Displays bars
+		q1.qdisplay();//Displays questions
 
-		fill(246, 177, 85);
-		text("Question number:",135,220);
-		text(qnumber+1,235,220);
-
-		text(myQuestionList.size(),200,350);//Shows total questions for error checking
-
-	
 		
-		if(qnumber<myQuestionList.size()-1){//If the question number is less than
+		//If the question number is less than size of the array increment
+		if(qnumber<myQuestionList.size()-1){
 			if(q1.answered==true)
 			{
-				//text
 				qnumber++;
 				player.upAnswered(1);
-				
 			}
 		}
-	
+
+		fill(246, 177, 85);
+		text("Question number:",135,220);//Displays current question number
+		text(qnumber+1,235,220);
+		
+		if(qnumber+1==myQuestionList.size())
+		{
+			fill(2, 75, 127);
+			rect(0,200,400,200,15);
+			fill(246, 177, 85);
+			text("Congratulations you completed the quiz",20,250);
+			text("You answered ",20,270);
+			text(player.correctb,100,270);
+			text("questions correctly",120,270);
+		}
 	}
 	
 	
 	public void dobackground(){
+
 		//Code to draw background rectangles for positioning
 		//Resource bar rects
 		fill(23, 56, 67);;//Sets background of bars to black
@@ -115,12 +121,11 @@ public class Game extends PApplet {
 	public void mouseClicked(){
 		if(mouseX >0 && mouseX<400 && mouseY>400 && mouseY<450)
 		{
-			//player.upAge(1);
 			results=q1.applyValues1();
 			q1.answered=true;
 			resArray1 = PApplet.split(results, ',');
-			player.upHealth(Integer.parseInt(resArray1[0]));
-			player.upWealth(Integer.parseInt(resArray1[1]));
+			player.upCorrect(Integer.parseInt(resArray1[0]));
+			player.upWrong(Integer.parseInt(resArray1[1]));
 			//player.upHappy(Integer.parseInt(resArray1[2]));
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>450 && mouseY<500)
@@ -128,8 +133,8 @@ public class Game extends PApplet {
 			results=q1.applyValues2();
 			q1.answered=true;
 			resArray2 = PApplet.split(results, ',');
-			player.upHealth(Integer.parseInt(resArray2[0]));
-			player.upWealth(Integer.parseInt(resArray2[1]));
+			player.upCorrect(Integer.parseInt(resArray2[0]));
+			player.upWrong(Integer.parseInt(resArray2[1]));
 			//player.upHappy(Integer.parseInt(resArray2[2]));
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>500 && mouseY<550)
@@ -137,8 +142,8 @@ public class Game extends PApplet {
 			results=q1.applyValues3();
 			q1.answered=true;
 			resArray3 = PApplet.split(results, ',');
-			player.upHealth(Integer.parseInt(resArray3[0]));
-			player.upWealth(Integer.parseInt(resArray3[1]));
+			player.upCorrect(Integer.parseInt(resArray3[0]));
+			player.upWrong(Integer.parseInt(resArray3[1]));
 			//player.upHappy(Integer.parseInt(resArray3[2]));
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>550 && mouseY<600)
@@ -146,11 +151,10 @@ public class Game extends PApplet {
 			results=q1.applyValues4();
 			q1.answered=true;
 			resArray4 = PApplet.split(results, ',');
-			player.upHealth(Integer.parseInt(resArray4[0]));
-			player.upWealth(Integer.parseInt(resArray4[1]));
+			player.upCorrect(Integer.parseInt(resArray4[0]));
+			player.upWrong(Integer.parseInt(resArray4[1]));
 			//player.upHappy(Integer.parseInt(resArray4[2]));
 		}
-		
 	}
 	//Changes colour of  question mouse is hovering over
 	public void mouseHover(){
