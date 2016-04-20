@@ -29,6 +29,7 @@ public class Questions{
 		parent.text(a3,20, 520);
 		parent.text(a4,20, 570);
 	}
+	
 	public String applyValues1(){
 		return res1;
 	}
@@ -41,6 +42,4 @@ public class Questions{
 	public String applyValues4(){
 		return res4;
 	}
-	
-	
 }

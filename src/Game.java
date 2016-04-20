@@ -8,6 +8,7 @@ public class Game extends PApplet {
 	String answer1,answer2,answer3,answer4;
 	String results;
 	
+	//Defining 4 arrays for passing of variables from database to check whether an answer is correct or incorrect
 	String[] resArray1=new String[2];
 	String[] resArray2=new String[2];
 	String[] resArray3=new String[2];
@@ -15,7 +16,7 @@ public class Game extends PApplet {
 	
 	public int qnumber=0;//Int for tracking what number question currently being asked
 	
-	Player player = new Player(this, 0, 0);
+	Player player = new Player(this, 0, 0);//Initializes player
 	public Questions q1;
 	
 	ArrayList<Questions> myQuestionList = new ArrayList<Questions>();//Arraylist of questions used so questions can be dynamically added and removed
@@ -43,13 +44,14 @@ public class Game extends PApplet {
 	             answer3 = msql.getString("A3RES");
 	             answer4 = msql.getString("A4RES");
 	            
-	             myQuestionList.add(new Questions(this,questiontxt,a1,a2,a3,a4,answer1,answer2,answer3,answer4));
+	             myQuestionList.add(new Questions(this,questiontxt,a1,a2,a3,a4,answer1,answer2,answer3,answer4));//Adds new obkect to questionlist with contents filled from the database
 	        }
 	    }
-		else
+		else//Error checking to detect if the database has been connected to successfully
 		{
 			text("Database failed to connect",150,300);
 		}
+		
 	}
 	
 	public void draw()
@@ -59,25 +61,25 @@ public class Game extends PApplet {
 		
 		player.display();//Display player stats
 		
-		q1 = myQuestionList.get(qnumber);
+		q1 = myQuestionList.get(qnumber);//q1 is set to be filled with whatever list item qnumber is currently set to
 		
-		q1.qdisplay();//Displays questions
+		q1.qdisplay();//Displays current object in q1
 
 		
 		//If the question number is less than size of the array increment
 		if(qnumber<myQuestionList.size()-1){
 			if(q1.answered==true)
 			{
-				qnumber++;
-				player.upAnswered(1);
+				qnumber++;//increments qnumber so next question can be displayed
+				player.upAnswered(1);//Increases bar that tracks how many questions have been answered
 			}
 		}
 
 		fill(246, 177, 85);
 		text("Question number:",135,220);//Displays current question number
-		text(qnumber+1,235,220);
+		text(qnumber+1,235,220);//Displays qnumber+1 which will be the number the user is currently at
 		
-		if(qnumber+1==myQuestionList.size())
+		if(qnumber+1==myQuestionList.size())//If qnumber is the same size as the total questions in the list shows completed screen with users results
 		{
 			fill(2, 75, 127);
 			rect(0,200,400,200,15);
@@ -106,7 +108,7 @@ public class Game extends PApplet {
 		rect(0,200,400,200,15);//Middle rect for questions
 	
 		fill(23, 56, 67);
-		rect(0,200,400,25,15);
+		rect(0,200,400,25,15);//Rect for containing the text which displays what question the user is currently on
 		
 		//Question answers outline rects
 		fill(23, 56, 67);//
@@ -119,14 +121,13 @@ public class Game extends PApplet {
 
 	
 	public void mouseClicked(){
-		if(mouseX >0 && mouseX<400 && mouseY>400 && mouseY<450)
+		if(mouseX >0 && mouseX<400 && mouseY>400 && mouseY<450)//Hit detection for if user clicks on first question box
 		{
-			results=q1.applyValues1();
-			q1.answered=true;
-			resArray1 = PApplet.split(results, ',');
-			player.upCorrect(Integer.parseInt(resArray1[0]));
-			player.upWrong(Integer.parseInt(resArray1[1]));
-			//player.upHappy(Integer.parseInt(resArray1[2]));
+			results=q1.applyValues1();//Calls apply value function which returns current answer1 from questions object. Answer 1 is A1RES from the database
+			q1.answered=true;//Sets answered bool to true so game will move on to the next question
+			resArray1 = PApplet.split(results, ',');//Splits the contents of results into resArray1
+			player.upCorrect(Integer.parseInt(resArray1[0]));//Changes the string at position 0 in resArray to an int. This int then becomes the value that upCorrect calls. If it is 1 upcorrectb will increase by 1 if it is 0 upcorrect does not increase
+			player.upWrong(Integer.parseInt(resArray1[1]));//Changes the string at position 1 in resArray to an int. This int then becomes the value that upWrong calls. If it is 1 upwrongb will increase by 1 if it is 0 upwrongb does not increase
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>450 && mouseY<500)
 		{
@@ -144,7 +145,6 @@ public class Game extends PApplet {
 			resArray3 = PApplet.split(results, ',');
 			player.upCorrect(Integer.parseInt(resArray3[0]));
 			player.upWrong(Integer.parseInt(resArray3[1]));
-			//player.upHappy(Integer.parseInt(resArray3[2]));
 		}
 		if(mouseX >0 && mouseX<400 && mouseY>550 && mouseY<600)
 		{
@@ -153,7 +153,6 @@ public class Game extends PApplet {
 			resArray4 = PApplet.split(results, ',');
 			player.upCorrect(Integer.parseInt(resArray4[0]));
 			player.upWrong(Integer.parseInt(resArray4[1]));
-			//player.upHappy(Integer.parseInt(resArray4[2]));
 		}
 	}
 	//Changes colour of  question mouse is hovering over
@@ -186,5 +185,4 @@ public class Game extends PApplet {
 		PApplet.main(new String[] {"--present","Game"});
 	}
 }
-
 

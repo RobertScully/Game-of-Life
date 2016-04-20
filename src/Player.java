@@ -8,7 +8,7 @@ public class Player{
 	int answeredb=0;
 	
 	
-	Player(PApplet p, int cb, int wb){
+	Player(PApplet p, int cb, int wb){//Player Constructor
 		parent=p;
 		correctb=cb;
 		wrongb=wb;
@@ -29,8 +29,8 @@ public class Player{
 		parent.text(wrongb,170,200);//Prints value of bar
 		
 		//Displays bar with number of questions answered status
-		parent.fill(255, 140, 0);//Colour age bar
-		parent.rect(250,200,50,answeredb*-10);//Draw age bar rect with height = to current value of age
+		parent.fill(255, 140, 0);//Colour questions answered bar
+		parent.rect(250,200,50,answeredb*-10);//Draw questions answered bar rect with height = to current value of age
 		parent.fill(0,0,0);
 		parent.text(answeredb,270,200);//Prints value of bar
 		
